@@ -1,4 +1,4 @@
-## Hibiki-Zero frontend
+## Hibiri frontend
 
 First, [install `pnpm`](https://pnpm.io/installation) if you don't have it:
 ```bash

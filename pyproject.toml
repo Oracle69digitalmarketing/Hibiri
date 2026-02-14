@@ -1,5 +1,5 @@
 [project]
-name = "hibiki-zero"
+name = "hibiri"
 requires-python = ">= 3.10,<3.14"
 description = "Simultaneous Speech-to-Speech Translation Without Aligned Data."
 version = "0.0.4"
@@ -9,10 +9,15 @@ dependencies = [
     "moshi>=0.2.13",
     "gradio>=5.50.0",
     "jupyter>=1.1.1",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+    "librosa>=0.10.0",
+    "webrtcvad-wheels>=2.0.11",
+    "numpy<2.0.0",
 ]
 
 [tool.setuptools.dynamic]
-version = {attr = "hibiki_zero.__version__"}
+version = {attr = "hibiri.__version__"}
 
 [tool.ruff]
 line-length = 100
@@ -28,17 +33,18 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["hibiki_zero"]
+packages = ["hibiri"]
 artifacts = [
-    "hibiki_zero/samples/**",
-    "hibiki_zero/static/**",
+    "hibiri/samples/**",
+    "hibiri/static/**",
 ]
 
 [tool.hatch.metadata]
 allow-direct-references = true
 
 [project.scripts]
-hibiki-zero = "hibiki_zero.run:cli_app"
+hibiri = "hibiri.run:cli_app"
+hibiri-serve = "inference_server.main:start"
 
 [tool.uv]
 # System python distribution can have header files missing, so we use only the python

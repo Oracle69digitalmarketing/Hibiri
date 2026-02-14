@@ -17,7 +17,7 @@ from aiohttp import web
 from moshi.models import LMGen, LMModel, MimiModel, loaders
 from moshi.run_inference import get_condition_tensors
 
-from hibiki_zero.client_utils import log
+from hibiri.client_utils import log
 
 
 def seed_all(seed):

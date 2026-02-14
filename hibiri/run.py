@@ -15,8 +15,8 @@ from aiohttp import web
 from moshi.models import LMGen, loaders
 from typing_extensions import Annotated
 
-from hibiki_zero.client_utils import audio_read, log, save_results, stack_and_pad_audio
-from hibiki_zero.inference import ServerState, decode_outputs, encode_inputs, get_lmgen, seed_all
+from hibiri.client_utils import audio_read, log, save_results, stack_and_pad_audio
+from hibiri.inference import ServerState, decode_outputs, encode_inputs, get_lmgen, seed_all
 
 MODULE_DIR: Path = Path(__file__).parent
 DEFAULT_REPO: str = "kyutai/hibiki-zero-3b-pytorch-bf16@23b3e0b41782026c81dd5283a034107b01f9e513"
@@ -44,7 +44,7 @@ def serve(
     config_path: Annotated[Optional[str], typer.Option(help="Path to a config file.")] = None,
     tokenizer: Annotated[Optional[str], typer.Option(help="Path to a text tokenizer file.")] = None,
     model_weight: Annotated[
-        Optional[str], typer.Option(help="Path to a Hibiki-Zero checkpoint.")
+        Optional[str], typer.Option(help="Path to a Hibiri checkpoint.")
     ] = None,
     mimi_weight: Annotated[
         Optional[str], typer.Option(help="Path to a Mimi codec checkpoint.")
@@ -79,7 +79,7 @@ def serve(
         )
         return
 
-    log("info", "Starting Hibiki-Zero server.")
+    log("info", "Starting Hibiri server.")
     setup_tunnel, tunnel_token = None, ""
     if gradio_tunnel:
         try:
@@ -170,7 +170,7 @@ def generate(
     gen_duration: Annotated[
         float,
         typer.Option(
-            help="Generation duration in seconds. Should be <=120 seconds for Hibiki-Zero."
+            help="Generation duration in seconds. Should be <=120 seconds for Hibiri."
         ),
     ] = 120,
     out_dir: Annotated[Path, typer.Option(help="Directory where to save the outputs.")] = Path(
@@ -186,7 +186,7 @@ def generate(
     config_path: Annotated[Optional[str], typer.Option(help="Path to a config file.")] = None,
     tokenizer: Annotated[Optional[str], typer.Option(help="Path to a text tokenizer file.")] = None,
     model_weight: Annotated[
-        Optional[str], typer.Option(help="Path to a Hibiki-Zero checkpoint.")
+        Optional[str], typer.Option(help="Path to a Hibiri checkpoint.")
     ] = None,
     mimi_weight: Annotated[
         Optional[str], typer.Option(help="Path to a Mimi codec checkpoint.")
@@ -209,7 +209,7 @@ def generate(
     seed_all(seed)
     dtype = torch.bfloat16 if bf16 else torch.float16
 
-    log("info", "Starting Hibiki-Zero inference.")
+    log("info", "Starting Hibiri inference.")
     files = files if files is not None else DEFAULT_AUDIO_SAMPLES
     files = [fpath for fpath in files for _ in range(repeats)]
     all_files_exist: bool = len(files) > 0

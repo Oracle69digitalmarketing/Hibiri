@@ -22,7 +22,7 @@ export default function Home() {
   const [stepsSinceLastWord, setStepsSinceLastWord] = useState(0);
 
   const userVisualizerRef = useRef<WaveformVisualizerRef>(null);
-  const hibikiVisualizerRef = useRef<WaveformVisualizerRef>(null);
+  const hibiriVisualizerRef = useRef<WaveformVisualizerRef>(null);
 
   const wsProtocol =
     typeof window !== "undefined" && window.location.protocol === "https:"
@@ -78,7 +78,7 @@ export default function Home() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `hibiki-zero-${new Date().toISOString().slice(0, 19).replace(/:/g, "-")}.webm`;
+    a.download = `hibiri-${new Date().toISOString().slice(0, 19).replace(/:/g, "-")}.webm`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -103,7 +103,7 @@ export default function Home() {
         // Text data
         const textDecoder = new TextDecoder();
         const text = textDecoder.decode(dataBytes);
-        const TEXT_STREAM_OFFSET_MS = 160; // Hibiki's audio is delayed by two frames compared to the text.
+        const TEXT_STREAM_OFFSET_MS = 160; // Hibiri's audio is delayed by two frames compared to the text.
         setWordsReceived((prev) => [
           ...prev,
           { text, time: Date.now() + TEXT_STREAM_OFFSET_MS },
@@ -166,14 +166,14 @@ export default function Home() {
   return (
     <div className="flex min-h-screen justify-center bg-background text-textgray text-sm">
       <main className="flex min-h-screen w-xl max-w-screen flex-col items-center gap-4 py-10 px-4 bg-background sm:items-start">
-        <h1 className="text-5xl text-green pb-1">Hibiki-Zero</h1>
+        <h1 className="text-5xl text-green pb-1">Hibiri</h1>
         <div className="flex flex-col gap-2">
           <p>
             Kyutai&apos;s latest real-time speech-to-speech translation model.
             {/* TODO link to blog and code */}
           </p>
           <p>
-            Hibiki-Zero translates into English from French, Spanish, German,
+            Hibiri translates into English from French, Spanish, German,
             and Portugese.
           </p>
           <p>Use headphones for a better experience.</p>
@@ -248,10 +248,10 @@ export default function Home() {
             </div>
             <div className="relative flex flex-col">
               <span className="absolute top-2 left-2 text-textgray text-xs uppercase tracking-wider z-10 font-medium">
-                Hibiki-Zero
+                Hibiri
               </span>
               <WaveformVisualizer
-                ref={hibikiVisualizerRef}
+                ref={hibiriVisualizerRef}
                 width={800}
                 height={120}
                 waveformColor="#39F2AE"

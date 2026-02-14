@@ -23,7 +23,7 @@ jobs:
       run: |
         bash build_frontend.sh
     - name: Temporarily unignore static in gitignore
-      run: sed -i 's/^hibiki_zero\/static\/$/# hibiki_zero\/static\//' .gitignore
+      run: sed -i 's/^hibiri\/static\/$/# hibiri\/static\//' .gitignore
     - name: Build wheels
       run: uv build
     - name: Publish package distributions to PyPI
