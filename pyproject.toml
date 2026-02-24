@@ -44,6 +44,7 @@ allow-direct-references = true
 
 [project.scripts]
 hibiri = "hibiri.run:cli_app"
+app = "hibiri.server:app"
 
 [tool.uv]
 # System python distribution can have header files missing, so we use only the python
@@ -52,6 +53,3 @@ python-preference = "only-managed"
 
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
-
-[tool.vercel.deployment]
-entrypoint = "hibiri/server.py"
